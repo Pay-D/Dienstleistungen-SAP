@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Dienstleistungen_SAP.Pages.UserLoginPage"
-             Title="UserLoginPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+<ContentPage
+    x:Class="Dienstleistungen_SAP.Pages.UserLoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Dienstleistungen_SAP.ViewModel"
+    Title="UserLoginPage"
+    x:DataType="vm:UserLoginViewModel">
+    <VerticalStackLayout Margin="20" Spacing="20">
+        <VerticalStackLayout>
+            <Label Text="Email" />
+            <Entry Text="{Binding Email}" />
+        </VerticalStackLayout>
+        <VerticalStackLayout>
+            <Label Text="Password" />
+            <Entry IsPassword="True" Text="{Binding Password}" />
+        </VerticalStackLayout>
+        <Button
+            Command="{Binding LoginCommand}"
+            HorizontalOptions="Start"
+            Text="Login" />
     </VerticalStackLayout>
 </ContentPage>

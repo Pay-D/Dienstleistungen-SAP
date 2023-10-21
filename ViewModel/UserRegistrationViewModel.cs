@@ -8,8 +8,11 @@ public partial class UserRegistrationViewModel: ObservableObject
 {
     private readonly FirebaseAuthClient authClient;
 
+    private UserAuthentification userAuthentification;
+
     public UserRegistrationViewModel(FirebaseAuthClient authClient)
     {
+        userAuthentification = UserAuthentification.getInstance();
         this.authClient = authClient;
     }
 
@@ -32,12 +35,17 @@ public partial class UserRegistrationViewModel: ObservableObject
                 throw new Exception("Passwörter stimmen nicht überein");
             }
 
-            await authClient.CreateUserWithEmailAndPasswordAsync(Email, Password);
-            await Application.Current.MainPage.DisplayAlert("Registration", "Registration erfolgreich", "OK");
+            UserCredential userCredential = await authClient.CreateUserWithEmailAndPasswordAsync(Email, Password);
+
+            await authClient.SignInWithEmailAndPasswordAsync(Email, Password);
+
+            userAuthentification.UserCredential = userCredential;
+
+            await Application.Current.MainPage.DisplayAlert("Registration", "Registration war erfolgreich!", "OK");
         }
         catch (Exception ex)
         {
-            await Application.Current.MainPage.DisplayAlert("Fehler während Registration", ex.Message,"OK");
+            await Application.Current.MainPage.DisplayAlert("Es ist ein Fehler aufgetreten!", ex.Message,"OK");
         }
     }
 }

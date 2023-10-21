@@ -22,4 +22,12 @@ public class Service
     public string Description { get; set; }
     public string Title { get; set; }
     public int UserId { get; set; }
+
+    public ServiceType Type { get; set; }
+
+    public enum ServiceType
+    {
+        Offer,
+        Request
+    }
 }
