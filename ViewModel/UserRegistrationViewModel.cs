@@ -42,6 +42,8 @@ public partial class UserRegistrationViewModel: ObservableObject
             userAuthentification.UserCredential = userCredential;
 
             await Application.Current.MainPage.DisplayAlert("Registration", "Registration war erfolgreich!", "OK");
+
+            await Shell.Current.GoToAsync("..");
         }
         catch (Exception ex)
         {

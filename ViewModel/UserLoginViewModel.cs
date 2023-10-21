@@ -34,6 +34,8 @@ public partial class UserLoginViewModel: ObservableObject
             userAuthentification.UserCredential = userCredential;
 
             await Application.Current.MainPage.DisplayAlert("Authentifizierung", "Authentifizierung war erfolgreich!", "OK");
+
+            await Shell.Current.GoToAsync("..");
         }
         catch (Exception ex)
         {
