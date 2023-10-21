@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Maui;
 using Dienstleistungen_SAP.Pages;
 using Dienstleistungen_SAP.ViewModel;
+using Firebase.Auth;
+using Firebase.Auth.Providers;
 using Microsoft.Extensions.Logging;
 
 namespace Dienstleistungen_SAP
@@ -35,6 +37,23 @@ namespace Dienstleistungen_SAP
 
             builder.Services.AddTransient<AddServicePage>();
             builder.Services.AddTransient<AddServiceViewModel>();
+
+            builder.Services.AddTransient<UserRegistrationPage>();
+            builder.Services.AddTransient<UserRegistrationViewModel>();
+
+            builder.Services.AddTransient<UserLoginPage>();
+            builder.Services.AddTransient<UserLoginViewModel>();
+
+            builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig()
+            {
+                ApiKey = "AIzaSyDdIbPOsEp_VvFfdRypzBm_MKGESQZIF_Q",
+                AuthDomain = "dienstleistungen-sap.firebaseapp.com",
+                Providers = new FirebaseAuthProvider[]
+                {
+                    new EmailProvider()
+                }
+            }));
+
 
 #if DEBUG
             builder.Logging.AddDebug();

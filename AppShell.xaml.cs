@@ -13,6 +13,9 @@ namespace Dienstleistungen_SAP
             Routing.RegisterRoute(nameof(ServiceRequestsPage), typeof(ServiceRequestsPage));
             Routing.RegisterRoute(nameof(AddServicePage), typeof(AddServicePage));
             Routing.RegisterRoute(nameof(ServiceDetailsPage), typeof(ServiceDetailsPage));
+            Routing.RegisterRoute(nameof(UserRegistrationPage), typeof(UserRegistrationPage));
+            Routing.RegisterRoute(nameof(UserLoginPage), typeof(UserLoginPage));
+
         }
     }
 }

@@ -9,34 +9,34 @@ namespace Dienstleistungen_SAP.ViewModel;
 public partial class MainViewModel: ObservableObject
 {
 
-    [ObservableProperty]
-    ObservableCollection<Service> services;
-
-    public MainViewModel()
-    {
-        services = new ObservableCollection<Service>
-       {
-           new Service() { Id=1, Title = "Test1", CreationDate = DateTime.Now, Description = "Test1Desc", Plz="99999"},
-           new Service() { Id=2, Title = "Test2", CreationDate = DateTime.Now, Description = "Test2Desc", Plz="99999"},
-           new Service() { Id=3, Title = "Test3", CreationDate = DateTime.Now, Description = "Test3Desc", Plz="99999"},
-           new Service() { Id=4, Title = "Test4", CreationDate = DateTime.Now, Description = "Test4Desc", Plz="99999"}
-       };
-
-    }
-
-
     [RelayCommand]
-    async Task AddService()
+    async Task RegisterUser()
     {
-        await Shell.Current.GoToAsync(nameof(AddServicePage));
+        await Shell.Current.GoToAsync(nameof(UserRegistrationPage));
     }
 
     [RelayCommand]
-    async Task ShowService(int serviceId)
+    async Task LoginUser()
     {
-        await Shell.Current.GoToAsync($"{nameof(ServiceDetailsPage)}?Id={serviceId}");
+        await Shell.Current.GoToAsync(nameof(UserLoginPage));
     }
 
+    [RelayCommand]
+    async Task ServiceOffers()
+    {
+        await Shell.Current.GoToAsync(nameof(ServiceOffersPage));
+    }
 
+    [RelayCommand]
+    async Task ServiceRequests()
+    {
+        await Shell.Current.GoToAsync(nameof(ServiceRequestsPage));
+    }
+
+    [RelayCommand]
+    async Task MyServices()
+    {
+        await Shell.Current.GoToAsync(nameof(MyServicesPage));
+    }
 
 }
