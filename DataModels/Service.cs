@@ -6,7 +6,7 @@ public class Service
     {
     }
 
-    public Service(int id, DateTime creationDate, string plz, string description, string title, int userId)
+    public Service(int id, DateTime creationDate, string plz, string description, string title, string userId)
     {
         Id = id;
         CreationDate = creationDate;
@@ -21,7 +21,7 @@ public class Service
     public string Plz { get; set; }
     public string Description { get; set; }
     public string Title { get; set; }
-    public int UserId { get; set; }
+    public string UserId { get; set; }
 
     public ServiceType Type { get; set; }
 

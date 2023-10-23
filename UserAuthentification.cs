@@ -4,7 +4,6 @@ namespace Dienstleistungen_SAP;
 
 public class UserAuthentification
 {
-
     public bool IsAuthentificated { get; private set;}
     
     private static UserAuthentification instance;
@@ -31,6 +30,11 @@ public class UserAuthentification
             instance = new UserAuthentification();
         } 
         return instance;
+    }
+
+    public string GetCurrentUserId()
+    {
+        return userCredential.User.Uid;
     }
 
 }

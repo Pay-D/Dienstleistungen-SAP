@@ -1,17 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Dienstleistungen_SAP.DataModels;
 
 namespace Dienstleistungen_SAP.ViewModel;
 
-[QueryProperty("Id", "Id")]
+[QueryProperty("Service", "Service")]
 public partial class ServiceDetailsViewModel: ObservableObject
 {
     [ObservableProperty]
-    int id;
-
-    [RelayCommand]
-    async Task GoBack()
-    {
-        await Shell.Current.GoToAsync("..");
-    }
+    Service service;
 }

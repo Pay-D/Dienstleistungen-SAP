@@ -6,13 +6,32 @@
     xmlns:vm="clr-namespace:Dienstleistungen_SAP.ViewModel"
     Title="ServiceDetails"
     x:DataType="vm:ServiceDetailsViewModel">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
-        <Label Text="{Binding Id}" />
-        <Button Command="{Binding GoBackCommand}" Text="Go Back" />
-    </VerticalStackLayout>
-
+    <Frame Margin="30" Padding="30">
+        <VerticalStackLayout Spacing="20">
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Id:" />
+                <Label Text="{Binding Service.Id}" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Plz:" />
+                <Label Text="{Binding Service.Plz}" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="UserId:" />
+                <Label Text="{Binding Service.UserId}" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Type:" />
+                <Label Text="{Binding Service.Type}" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Title:" />
+                <Label Text="{Binding Service.Title}" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Description:" />
+                <Label Text="{Binding Service.Description}" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Frame>
 </ContentPage>

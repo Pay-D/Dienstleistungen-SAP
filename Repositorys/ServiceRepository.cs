@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Dienstleistungen_SAP.DataModels;
 using System.Collections.ObjectModel;
 
@@ -25,6 +26,25 @@ public class ServiceRepository
            new Service() { Id=3, Title = "Test3", CreationDate = DateTime.Now, Description = "Test3Desc", Plz="99999", Type = Service.ServiceType.Offer},
            new Service() { Id=4, Title = "Test4", CreationDate = DateTime.Now, Description = "Test4Desc", Plz="99999", Type = Service.ServiceType.Offer}
     };
+
+    public ObservableCollection<Service> getByUserId(string userId)
+    {
+        return services.Where(service => {
+            return service.UserId != null && service.UserId.Equals(userId);
+        }).ToObservableCollection();
+    }
+
+    public ObservableCollection<Service> getByServiceType(Service.ServiceType type)
+    {
+        return services.Where(service => {
+            return service.Type.Equals(type);
+        }).ToObservableCollection();
+    }
+
+    public Service getById(int id)
+    {
+        return services.FirstOrDefault(service => service.Id == id);
+    }
 
     public ObservableCollection<Service> getAll()
     {
