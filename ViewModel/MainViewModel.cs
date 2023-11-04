@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Dienstleistungen_SAP.DataModels;
 using Dienstleistungen_SAP.Pages;
-using System.Collections.ObjectModel;
 
 namespace Dienstleistungen_SAP.ViewModel;
 
@@ -10,9 +8,9 @@ public partial class MainViewModel: ObservableObject
 {
     private UserAuthentification userAuthentification;
 
-    public MainViewModel()
+    public MainViewModel(UserAuthentification userAuthentification)
     {
-        userAuthentification = UserAuthentification.getInstance();
+        this.userAuthentification = userAuthentification;
     }
 
 

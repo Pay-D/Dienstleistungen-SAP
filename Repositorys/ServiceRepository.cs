@@ -7,18 +7,6 @@ namespace Dienstleistungen_SAP.Repositorys;
 
 public class ServiceRepository
 {
-    private static ServiceRepository instance;
-
-    private ServiceRepository() {}
-
-    public static ServiceRepository getInstance()
-    {
-        if (instance == null)
-        {
-            instance = new ServiceRepository();
-        }
-        return instance;
-    }
 
     public ObservableCollection<Service> services = new ObservableCollection<Service>() {
            new Service() { Id=1, Title = "Test1", CreationDate = DateTime.Now, Description = "Test1Desc", Plz="99999", Type = Service.ServiceType.Request},

@@ -15,9 +15,9 @@ public partial class ServiceRequestsViewModel: ObservableObject
 
     private ServiceRepository serviceRepository;
 
-    public ServiceRequestsViewModel()
+    public ServiceRequestsViewModel(ServiceRepository serviceRepository)
     {
-        serviceRepository = ServiceRepository.getInstance();
+        this.serviceRepository = serviceRepository;
         services = serviceRepository.getByServiceType(Service.ServiceType.Request);
     }
 

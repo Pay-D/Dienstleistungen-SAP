@@ -6,14 +6,11 @@ namespace Dienstleistungen_SAP.ViewModel;
 
 public partial class UserRegistrationViewModel: ObservableObject
 {
-    private readonly FirebaseAuthClient authClient;
+    private readonly UserAuthentification userAuthentification;
 
-    private UserAuthentification userAuthentification;
-
-    public UserRegistrationViewModel(FirebaseAuthClient authClient)
+    public UserRegistrationViewModel(UserAuthentification userAuthentification)
     {
-        userAuthentification = UserAuthentification.getInstance();
-        this.authClient = authClient;
+        this.userAuthentification = userAuthentification;
     }
 
 
@@ -29,25 +26,6 @@ public partial class UserRegistrationViewModel: ObservableObject
     [RelayCommand]
     public async Task Register()
     {
-        try {             
-            if (Password != PasswordRepeat)
-            {
-                throw new Exception("Passwörter stimmen nicht überein");
-            }
-
-            UserCredential userCredential = await authClient.CreateUserWithEmailAndPasswordAsync(Email, Password);
-
-            await authClient.SignInWithEmailAndPasswordAsync(Email, Password);
-
-            userAuthentification.UserCredential = userCredential;
-
-            await Application.Current.MainPage.DisplayAlert("Registration", "Registration war erfolgreich!", "OK");
-
-            await Shell.Current.GoToAsync("..");
-        }
-        catch (Exception ex)
-        {
-            await Application.Current.MainPage.DisplayAlert("Es ist ein Fehler aufgetreten!", ex.Message,"OK");
-        }
+        await userAuthentification.Register(Email, Password, PasswordRepeat);
     }
 }

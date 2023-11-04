@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Dienstleistungen_SAP.Pages;
 
 namespace Dienstleistungen_SAP

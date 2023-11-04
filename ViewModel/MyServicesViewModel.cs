@@ -18,10 +18,10 @@ public partial class MyServicesViewModel: ObservableObject
 
     private UserAuthentification userAuthentification;
 
-    public MyServicesViewModel()
+    public MyServicesViewModel(ServiceRepository serviceRepository, UserAuthentification userAuthentification)
     {
-        userAuthentification = UserAuthentification.getInstance();
-        serviceRepository = ServiceRepository.getInstance();
+        this.userAuthentification = userAuthentification;
+        this.serviceRepository = serviceRepository;
         services = serviceRepository.getByUserId(userAuthentification.GetCurrentUserId());
     }
 

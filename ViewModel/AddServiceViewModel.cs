@@ -14,11 +14,11 @@ public partial class AddServiceViewModel: ObservableObject
 
     private UserAuthentification userAuthentification;
 
-    public AddServiceViewModel()
+    public AddServiceViewModel(UserAuthentification userAuthentification, ServiceRepository serviceRepository)
     {
-        userAuthentification = UserAuthentification.getInstance();
+        this.userAuthentification = userAuthentification;
         service = new Service();
-        serviceRepository = ServiceRepository.getInstance();
+        this.serviceRepository = serviceRepository;
     }
 
     [RelayCommand]

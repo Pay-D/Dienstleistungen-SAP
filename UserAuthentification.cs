@@ -1,40 +1,68 @@
-﻿using Firebase.Auth;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Firebase.Auth;
 
 namespace Dienstleistungen_SAP;
 
-public class UserAuthentification
+public partial class UserAuthentification: ObservableObject
 {
-    public bool IsAuthentificated { get; private set;}
-    
-    private static UserAuthentification instance;
+    [ObservableProperty]
+    bool isAuthentificated;
 
-    private UserAuthentification() 
+    private readonly FirebaseAuthClient authClient;
+
+    public UserAuthentification(FirebaseAuthClient authClient)
     {
         IsAuthentificated = false;
+        this.authClient = authClient;
     }
 
-    private UserCredential userCredential;
+    private UserCredential UserCredential { get; set; }
 
-    public UserCredential UserCredential {
-        private get => userCredential;
-        set {
-            userCredential = value;
-            IsAuthentificated = true;
-        }
-    }
-
-    public static UserAuthentification getInstance()
-    {
-        if (instance == null)
-        {
-            instance = new UserAuthentification();
-        } 
-        return instance;
-    }
 
     public string GetCurrentUserId()
     {
-        return userCredential.User.Uid;
+        return UserCredential.User.Uid;
+    }
+
+    public async Task Login(String email, String password)
+    {
+        try
+        {
+            UserCredential = await authClient.SignInWithEmailAndPasswordAsync(email, password);
+
+            IsAuthentificated = true;
+
+            await Application.Current.MainPage.DisplayAlert("Authentifizierung", "Authentifizierung war erfolgreich!", "OK");
+
+            await Shell.Current.GoToAsync("..");
+        }
+        catch (Exception ex)
+        {
+            await Application.Current.MainPage.DisplayAlert("Es ist ein Fehler aufgetreten!", ex.Message, "OK");
+        }
+    }
+
+    public async Task Register(String email, String password, String passwordRepeat)
+    {
+        try
+        {
+            if (password != passwordRepeat)
+            {
+                throw new Exception("Passwörter stimmen nicht überein");
+            }
+
+            UserCredential = await authClient.CreateUserWithEmailAndPasswordAsync(email, password);
+
+           IsAuthentificated = true;
+
+            await Application.Current.MainPage.DisplayAlert("Registration", "Registration war erfolgreich!", "OK");
+
+            await Shell.Current.GoToAsync("..");
+        }
+        catch (Exception ex)
+        {
+            await Application.Current.MainPage.DisplayAlert("Es ist ein Fehler aufgetreten!", ex.Message, "OK");
+        }
     }
 
 }

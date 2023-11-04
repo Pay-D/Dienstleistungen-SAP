@@ -6,17 +6,12 @@ namespace Dienstleistungen_SAP.ViewModel;
 
 public partial class UserLoginViewModel: ObservableObject
 {
+    private readonly UserAuthentification userAuthentification;
 
-    private readonly FirebaseAuthClient authClient;
-
-    private UserAuthentification userAuthentification;
-
-    public UserLoginViewModel(FirebaseAuthClient authClient)
+    public UserLoginViewModel(UserAuthentification userAuthentification)
     {
-        userAuthentification = UserAuthentification.getInstance();
-        this.authClient = authClient;
+        this.userAuthentification = userAuthentification;
     }
-
 
     [ObservableProperty]
     string email;
@@ -27,19 +22,6 @@ public partial class UserLoginViewModel: ObservableObject
     [RelayCommand]
     public async Task Login()
     {
-        try
-        {
-            UserCredential userCredential = await authClient.SignInWithEmailAndPasswordAsync(Email, Password);
-
-            userAuthentification.UserCredential = userCredential;
-
-            await Application.Current.MainPage.DisplayAlert("Authentifizierung", "Authentifizierung war erfolgreich!", "OK");
-
-            await Shell.Current.GoToAsync("..");
-        }
-        catch (Exception ex)
-        {
-            await Application.Current.MainPage.DisplayAlert("Es ist ein Fehler aufgetreten!", ex.Message, "OK");
-        }
+       await userAuthentification.Login(Email, Password);
     }
 }

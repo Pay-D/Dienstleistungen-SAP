@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Dienstleistungen_SAP.Pages;
+using Dienstleistungen_SAP.Repositorys;
 using Dienstleistungen_SAP.ViewModel;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
@@ -44,7 +45,7 @@ namespace Dienstleistungen_SAP
             builder.Services.AddTransient<UserLoginPage>();
             builder.Services.AddTransient<UserLoginViewModel>();
 
-            builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig()
+            builder.Services.AddSingleton(new UserAuthentification(new FirebaseAuthClient(new FirebaseAuthConfig()
             {
                 ApiKey = "AIzaSyDdIbPOsEp_VvFfdRypzBm_MKGESQZIF_Q",
                 AuthDomain = "dienstleistungen-sap.firebaseapp.com",
@@ -52,7 +53,9 @@ namespace Dienstleistungen_SAP
                 {
                     new EmailProvider()
                 }
-            }));
+            })));
+            builder.Services.AddSingleton(new ServiceRepository());
+            builder.Services.AddSingleton(new UserRepository());
 
 
 #if DEBUG
