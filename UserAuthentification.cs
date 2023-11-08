@@ -1,4 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Dienstleistungen_SAP.DataModels;
+using Dienstleistungen_SAP.Firebase;
+using Dienstleistungen_SAP.Repositorys;
 using Firebase.Auth;
 
 namespace Dienstleistungen_SAP;
@@ -8,12 +11,20 @@ public partial class UserAuthentification: ObservableObject
     [ObservableProperty]
     bool isAuthentificated;
 
+    public DataModels.User CurrentUser { get; set; }
+
     private readonly FirebaseAuthClient authClient;
 
-    public UserAuthentification(FirebaseAuthClient authClient)
+    private readonly FirestoreProvider firestoreProvider;
+
+    private readonly UserRepository userRepository;
+
+    public UserAuthentification(FirebaseAuthClient authClient,FirestoreProvider firestoreProvider, UserRepository userRepository)
     {
         IsAuthentificated = false;
         this.authClient = authClient;
+        this.firestoreProvider = firestoreProvider;
+        this.userRepository = userRepository;
     }
 
     private UserCredential UserCredential { get; set; }
@@ -30,6 +41,8 @@ public partial class UserAuthentification: ObservableObject
         {
             UserCredential = await authClient.SignInWithEmailAndPasswordAsync(email, password);
 
+            CurrentUser = userRepository.getById(UserCredential.User.Uid); 
+
             IsAuthentificated = true;
 
             await Application.Current.MainPage.DisplayAlert("Authentifizierung", "Authentifizierung war erfolgreich!", "OK");
@@ -42,7 +55,7 @@ public partial class UserAuthentification: ObservableObject
         }
     }
 
-    public async Task Register(string email, string password, string passwordRepeat)
+    public async Task Register(DataModels.User user, string password, string passwordRepeat)
     {
         try
         {
@@ -51,9 +64,13 @@ public partial class UserAuthentification: ObservableObject
                 throw new Exception("Passwörter stimmen nicht überein");
             }
 
-            UserCredential = await authClient.CreateUserWithEmailAndPasswordAsync(email, password);
+            UserCredential = await authClient.CreateUserWithEmailAndPasswordAsync(user.Email, password);
+            
+            user.Id = UserCredential.User.Uid;
+            userRepository.addOrUpdate(user);
+            CurrentUser = user;
 
-           IsAuthentificated = true;
+            IsAuthentificated = true;
 
             await Application.Current.MainPage.DisplayAlert("Registration", "Registration war erfolgreich!", "OK");
 

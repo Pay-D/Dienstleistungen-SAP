@@ -6,22 +6,44 @@
     xmlns:vm="clr-namespace:Dienstleistungen_SAP.ViewModel"
     Title="UserRegistrationPage"
     x:DataType="vm:UserRegistrationViewModel">
-    <VerticalStackLayout Margin="20" Spacing="20">
-        <VerticalStackLayout>
-            <Label Text="Email" />
-            <Entry Text="{Binding Email}" />
+    <ScrollView>
+        <VerticalStackLayout Margin="20" Spacing="20">
+            <VerticalStackLayout>
+                <Label Text="Vorname" />
+                <Entry Text="{Binding User.FirstName}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label Text="Nachname" />
+                <Entry Text="{Binding User.LastName}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label Text="Telefon" />
+                <Entry Text="{Binding User.Phone}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label Text="Stadt/Ort" />
+                <Entry Text="{Binding User.City}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label Text="Postleitzahl" />
+                <Entry Text="{Binding User.Plz}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label Text="Email" />
+                <Entry Text="{Binding User.Email}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label Text="Password" />
+                <Entry IsPassword="True" Text="{Binding Password}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label Text="Password wiederhohlung" />
+                <Entry IsPassword="True" Text="{Binding PasswordRepeat}" />
+            </VerticalStackLayout>
+            <Button
+                Command="{Binding RegisterCommand}"
+                HorizontalOptions="Start"
+                Text="Register" />
         </VerticalStackLayout>
-        <VerticalStackLayout>
-            <Label Text="Password" />
-            <Entry IsPassword="True" Text="{Binding Password}" />
-        </VerticalStackLayout>
-        <VerticalStackLayout>
-            <Label Text="Password wiederhohlung" />
-            <Entry IsPassword="True" Text="{Binding PasswordRepeat}" />
-        </VerticalStackLayout>
-        <Button
-            Command="{Binding RegisterCommand}"
-            HorizontalOptions="Start"
-            Text="Register" />
-    </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

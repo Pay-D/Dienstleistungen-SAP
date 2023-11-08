@@ -5,10 +5,6 @@ namespace Dienstleistungen_SAP.DataModels;
 [FirestoreData]
 public class User: IFirebaseEntity
 {
-    public User()
-    {
-        Id = Guid.NewGuid().ToString("N");
-    }
 
 
     [FirestoreProperty]

@@ -65,10 +65,6 @@ namespace Dienstleistungen_SAP
                     new EmailProvider()
                 }
             });
-            builder.Services.AddSingleton(new UserAuthentification(firebaseAuthClient));
-
-
-
 
             var firestoreProvider = new FirestoreProvider(new FirestoreDbBuilder
             {
@@ -76,11 +72,13 @@ namespace Dienstleistungen_SAP
                 JsonCredentials = adminSDKContent
             }.Build());
 
+            var userRepository = new UserRepository(firestoreProvider);
 
             builder.Services.AddSingleton(new ServiceRepository(firestoreProvider));
-            builder.Services.AddSingleton(new UserRepository(firestoreProvider));
+            builder.Services.AddSingleton(userRepository);
 
 
+            builder.Services.AddSingleton(new UserAuthentification(firebaseAuthClient, firestoreProvider, userRepository));
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

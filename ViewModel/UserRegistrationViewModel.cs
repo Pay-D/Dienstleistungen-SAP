@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Dienstleistungen_SAP.DataModels;
 using Firebase.Auth;
 
 namespace Dienstleistungen_SAP.ViewModel;
@@ -11,11 +12,12 @@ public partial class UserRegistrationViewModel: ObservableObject
     public UserRegistrationViewModel(UserAuthentification userAuthentification)
     {
         this.userAuthentification = userAuthentification;
+        user = new DataModels.User();
     }
 
 
     [ObservableProperty]
-    string email;
+    DataModels.User user;
 
     [ObservableProperty]
     string password;
@@ -26,6 +28,6 @@ public partial class UserRegistrationViewModel: ObservableObject
     [RelayCommand]
     public async Task Register()
     {
-        await userAuthentification.Register(Email, Password, PasswordRepeat);
+        await userAuthentification.Register(User, Password, PasswordRepeat);
     }
 }
