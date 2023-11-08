@@ -25,11 +25,10 @@ public partial class AddServiceViewModel: ObservableObject
     public async Task AddService()
     {
         Service.Type = Service.ServiceType.Offer;
-        Service.CreationDate = DateTime.Now;
-        Service.Id = serviceRepository.getAll().Count + 1;
+        Service.CreationDate = DateTime.Now.ToUniversalTime();
         Service.UserId = userAuthentification.GetCurrentUserId();
 
-        serviceRepository.add(Service);
+        serviceRepository.addOrUpdate(Service);
         await Shell.Current.GoToAsync("../..");
         await Application.Current.MainPage.DisplayAlert("Service", "Service wurde erfolgreich hinzugefügt!", "OK");
     } 

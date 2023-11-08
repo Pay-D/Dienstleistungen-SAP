@@ -2,9 +2,12 @@
 using Dienstleistungen_SAP.Pages;
 using Dienstleistungen_SAP.Repositorys;
 using Dienstleistungen_SAP.ViewModel;
+using Dienstleistungen_SAP.Firebase;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
+using Google.Cloud.Firestore;
 using Microsoft.Extensions.Logging;
+using System.Text.Json;
 
 namespace Dienstleistungen_SAP
 {
@@ -12,6 +15,14 @@ namespace Dienstleistungen_SAP
     {
         public static MauiApp CreateMauiApp()
         {
+            var adminSDKFilepath = "dienstleistungen-sap-firebase-adminsdk-x0k8o-ae275026dd.json";
+
+            using var reader = new StreamReader(FileSystem.OpenAppPackageFileAsync(adminSDKFilepath).GetAwaiter().GetResult());
+
+            var adminSDKContent = reader.ReadToEnd();
+
+            var firebaseSettings = new FirebaseSettings();
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -45,17 +56,29 @@ namespace Dienstleistungen_SAP
             builder.Services.AddTransient<UserLoginPage>();
             builder.Services.AddTransient<UserLoginViewModel>();
 
-            builder.Services.AddSingleton(new UserAuthentification(new FirebaseAuthClient(new FirebaseAuthConfig()
+            var firebaseAuthClient = new FirebaseAuthClient(new FirebaseAuthConfig()
             {
-                ApiKey = "AIzaSyDdIbPOsEp_VvFfdRypzBm_MKGESQZIF_Q",
-                AuthDomain = "dienstleistungen-sap.firebaseapp.com",
+                ApiKey = firebaseSettings.ApiKey,
+                AuthDomain = firebaseSettings.AuthDomain,
                 Providers = new FirebaseAuthProvider[]
                 {
                     new EmailProvider()
                 }
-            })));
-            builder.Services.AddSingleton(new ServiceRepository());
-            builder.Services.AddSingleton(new UserRepository());
+            });
+            builder.Services.AddSingleton(new UserAuthentification(firebaseAuthClient));
+
+
+
+
+            var firestoreProvider = new FirestoreProvider(new FirestoreDbBuilder
+            {
+                ProjectId = firebaseSettings.ProjectId,
+                JsonCredentials = adminSDKContent
+            }.Build());
+
+
+            builder.Services.AddSingleton(new ServiceRepository(firestoreProvider));
+            builder.Services.AddSingleton(new UserRepository(firestoreProvider));
 
 
 #if DEBUG

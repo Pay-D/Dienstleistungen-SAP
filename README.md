@@ -9,3 +9,5 @@ Used Visual Studio 2022 with the following extensions:
 Installed NuGet packages:
 
 - CommunityToolkit.Maui
+- FirebaseAuthentication.net
+- Google.Cloud.Firestore

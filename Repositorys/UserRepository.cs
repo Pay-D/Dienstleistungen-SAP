@@ -1,27 +1,41 @@
-﻿using Dienstleistungen_SAP.DataModels;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using Dienstleistungen_SAP.DataModels;
+using Dienstleistungen_SAP.Firebase;
 using System.Collections.ObjectModel;
 
 namespace Dienstleistungen_SAP.Repositorys;
 
 public class UserRepository
 {
+    private FirestoreProvider firestoreProvider;
 
-    public ObservableCollection<User> users = new ObservableCollection<User>() {
-           
-    };
+    public UserRepository(FirestoreProvider firestoreProvider)
+    {
+        this.firestoreProvider = firestoreProvider;
+    }
 
     public ObservableCollection<User> getAll()
     {
-        return users;
+        var users = firestoreProvider.GetAll<User>();
+        return users.ToObservableCollection();
     }
 
-    public void add(User user)
+    public User getById(string id)
     {
-        users.Add(user);
+        return firestoreProvider.Get<User>(id);
     }
 
-    public void update(User user)
+    public async void addOrUpdate(User user)
     {
-        throw new NotImplementedException();
+        try
+        {
+            firestoreProvider.AddOrUpdate(user);
+        }
+        catch (Exception e)
+        {
+            await Application.Current.MainPage.DisplayAlert("User", e.Message, "OK");
+            throw;
+        }
+
     }
 }

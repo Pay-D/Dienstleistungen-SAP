@@ -22,7 +22,7 @@ public partial class ServiceRequestsViewModel: ObservableObject
     }
 
     [RelayCommand]
-    async Task ShowService(int serviceId)
+    async Task ShowService(string serviceId)
     {
         await Shell.Current.GoToAsync($"{nameof(ServiceDetailsPage)}", new Dictionary<string, object> { { "Service", serviceRepository.getById(serviceId) } });
     }

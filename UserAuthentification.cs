@@ -24,7 +24,7 @@ public partial class UserAuthentification: ObservableObject
         return UserCredential.User.Uid;
     }
 
-    public async Task Login(String email, String password)
+    public async Task Login(string email, string password)
     {
         try
         {
@@ -42,7 +42,7 @@ public partial class UserAuthentification: ObservableObject
         }
     }
 
-    public async Task Register(String email, String password, String passwordRepeat)
+    public async Task Register(string email, string password, string passwordRepeat)
     {
         try
         {
