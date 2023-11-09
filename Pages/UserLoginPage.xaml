@@ -19,5 +19,9 @@
             Command="{Binding LoginCommand}"
             HorizontalOptions="Start"
             Text="Login" />
+        <Button
+            Command="{Binding RedirectToRegistrationPageCommand}"
+            HorizontalOptions="Start"
+            Text="Zur Registration" />
     </VerticalStackLayout>
 </ContentPage>

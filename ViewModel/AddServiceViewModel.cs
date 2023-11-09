@@ -24,7 +24,6 @@ public partial class AddServiceViewModel: ObservableObject
     [RelayCommand]
     public async Task AddService()
     {
-        Service.Type = Service.ServiceType.Offer;
         Service.CreationDate = DateTime.Now.ToUniversalTime();
         Service.UserId = userAuthentification.GetCurrentUserId();
 
