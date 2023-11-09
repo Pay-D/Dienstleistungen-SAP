@@ -19,6 +19,10 @@
             <Label Text="Plz" />
             <Entry MaxLength="5" Text="{Binding Service.Plz}" />
         </VerticalStackLayout>
+        <VerticalStackLayout RadioButtonGroup.GroupName="ServiceType" RadioButtonGroup.SelectedValue="{Binding Service.Type}">
+            <RadioButton x:Name="offerRadioButton" Content="Angebot" />
+            <RadioButton x:Name="requestRadioButton" Content="Anfrage" />
+        </VerticalStackLayout>
         <Button Command="{Binding AddServiceCommand}" Text="Erstellen" />
     </VerticalStackLayout>
 </ContentPage>
