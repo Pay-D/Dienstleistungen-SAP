@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:Dienstleistungen_SAP.ViewModel"
     Title="UserRegistrationPage"
-    x:DataType="vm:UserRegistrationViewModel">
+    x:DataType="vm:UserRegistrationViewModel"
+    Shell.FlyoutBehavior="Disabled">
     <ScrollView>
         <VerticalStackLayout Margin="20" Spacing="20">
             <VerticalStackLayout>

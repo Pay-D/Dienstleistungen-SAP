@@ -35,6 +35,6 @@ public partial class UserRegistrationViewModel: ObservableObject
     [RelayCommand]
     public async Task RedirectToLoginPage()
     {
-        await Shell.Current.GoToAsync(nameof(UserLoginPage));
+        await Shell.Current.GoToAsync("../");
     }
 }

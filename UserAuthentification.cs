@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Dienstleistungen_SAP.DataModels;
 using Dienstleistungen_SAP.Firebase;
+using Dienstleistungen_SAP.Pages;
 using Dienstleistungen_SAP.Repositorys;
 using Firebase.Auth;
 
@@ -47,7 +48,7 @@ public partial class UserAuthentification: ObservableObject
 
             await Application.Current.MainPage.DisplayAlert("Authentifizierung", "Authentifizierung war erfolgreich!", "OK");
 
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("///" + nameof(MainPage));
         }
         catch (Exception ex)
         {
@@ -74,7 +75,7 @@ public partial class UserAuthentification: ObservableObject
 
             await Application.Current.MainPage.DisplayAlert("Registration", "Registration war erfolgreich!", "OK");
 
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("///" + nameof(MainPage));
         }
         catch (Exception ex)
         {

@@ -1,68 +1,28 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Dienstleistungen_SAP.Pages;
+using Dienstleistungen_SAP.DataModels;
+using Dienstleistungen_SAP.Repositorys;
+using System.Collections.ObjectModel;
 
 namespace Dienstleistungen_SAP.ViewModel;
 
 public partial class MainViewModel: ObservableObject
 {
-    private UserAuthentification userAuthentification;
+    [ObservableProperty]
+    ObservableCollection<Service> services;
 
-    public MainViewModel(UserAuthentification userAuthentification)
+    private ServiceRepository serviceRepository;
+
+    public MainViewModel(ServiceRepository serviceRepository)
     {
-        this.userAuthentification = userAuthentification;
-    }
-
-
-    [RelayCommand]
-    async Task RegisterUser()
-    {
-        await Shell.Current.GoToAsync(nameof(UserRegistrationPage));
+        this.serviceRepository = serviceRepository;
+        services = serviceRepository.getAll();
     }
 
     [RelayCommand]
-    async Task LoginUser()
+    async Task ShowService(string serviceId)
     {
-        await Shell.Current.GoToAsync(nameof(UserLoginPage));
-    }
-
-    [RelayCommand]
-    async Task ServiceOffers()
-    {
-        if(!userAuthentification.IsAuthentificated)
-        {
-            redirectToLoginPage();
-            return;
-        }
-        await Shell.Current.GoToAsync(nameof(ServiceOffersPage));
-    }
-
-    [RelayCommand]
-    async Task ServiceRequests()
-    {
-        if (!userAuthentification.IsAuthentificated)
-        {
-            redirectToLoginPage();
-            return;
-        }
-        await Shell.Current.GoToAsync(nameof(ServiceRequestsPage));
-    }
-
-    [RelayCommand]
-    async Task MyServices()
-    {
-        if (!userAuthentification.IsAuthentificated)
-        {
-            redirectToLoginPage();
-            return;
-        }
-        await Shell.Current.GoToAsync(nameof(MyServicesPage));
-    }
-
-    private void redirectToLoginPage()
-    {
-        Application.Current.MainPage.DisplayAlert("Authentifikation", "Bitte loggen Sie sich erst ein!", "OK");
-        Shell.Current.GoToAsync(nameof(UserLoginPage));
+        await Shell.Current.GoToAsync($"{nameof(ServiceDetailsPage)}", new Dictionary<string, object> { { "Service", serviceRepository.getById(serviceId) } });
     }
 
 }

@@ -7,25 +7,27 @@
     xmlns:vm="clr-namespace:Dienstleistungen_SAP.ViewModel"
     Title="ServiceOffers"
     x:DataType="vm:ServiceOffersViewModel">
-    <VerticalStackLayout Margin="10" Spacing="10">
-        <CollectionView ItemsSource="{Binding Services}" SelectionMode="None">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="{x:Type models:Service}">
-                    <Grid>
-                        <Frame Margin="10">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ServiceOffersViewModel}}, Path=ShowServiceCommand}" CommandParameter="{Binding Id}" />
-                            </Frame.GestureRecognizers>
-                            <VerticalStackLayout Spacing="5">
-                                <Label FontSize="20" Text="{Binding Title}" />
-                                <Label Text="{Binding CreationDate, StringFormat='{MM-dd-yy}'}" />
-                                <Label Text="{Binding Id}" />
-                                <Label Text="{Binding Description}" />
-                            </VerticalStackLayout>
-                        </Frame>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout Margin="10" Spacing="10">
+            <CollectionView ItemsSource="{Binding Services}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type models:Service}">
+                        <Grid>
+                            <Frame Margin="10">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ServiceOffersViewModel}}, Path=ShowServiceCommand}" CommandParameter="{Binding Id}" />
+                                </Frame.GestureRecognizers>
+                                <VerticalStackLayout Spacing="5">
+                                    <Label FontSize="20" Text="{Binding Title}" />
+                                    <Label Text="{Binding CreationDate, StringFormat='{MM-dd-yy}'}" />
+                                    <Label Text="{Binding Id}" />
+                                    <Label Text="{Binding Description}" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

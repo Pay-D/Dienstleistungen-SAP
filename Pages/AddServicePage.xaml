@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:Dienstleistungen_SAP.ViewModel"
     Title="AddServicePage"
-    x:DataType="vm:AddServiceViewModel">
+    x:DataType="vm:AddServiceViewModel"
+    Shell.FlyoutBehavior="Disabled">
     <VerticalStackLayout Margin="20" Spacing="20">
         <VerticalStackLayout>
             <Label Text="Title" />

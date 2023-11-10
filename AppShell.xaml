@@ -3,12 +3,36 @@
     x:Class="Dienstleistungen_SAP.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pages="clr-namespace:Dienstleistungen_SAP.Pages"
-    Shell.FlyoutBehavior="Disabled">
-
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate pages:MainPage}"
-        Route="MainPage" />
+    xmlns:pages="clr-namespace:Dienstleistungen_SAP.Pages">
+    <FlyoutItem Title="Login" FlyoutItemIsVisible="False">
+        <ShellContent
+            Title="Login"
+            ContentTemplate="{DataTemplate pages:UserLoginPage}"
+            Route="UserLoginPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Main">
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate pages:MainPage}"
+            Route="MainPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="MyServices">
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate pages:MyServicesPage}"
+            Route="MyServicesPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Service Angebote">
+        <ShellContent
+            Title="Service Angebote"
+            ContentTemplate="{DataTemplate pages:ServiceOffersPage}"
+            Route="ServiceOffersPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Service Anfragen">
+        <ShellContent
+            Title="Service Anfragen"
+            ContentTemplate="{DataTemplate pages:ServiceRequestsPage}"
+            Route="ServiceRequestsPage" />
+    </FlyoutItem>
 
 </Shell>

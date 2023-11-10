@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:Dienstleistungen_SAP.ViewModel"
     Title="UserLoginPage"
-    x:DataType="vm:UserLoginViewModel">
+    x:DataType="vm:UserLoginViewModel"
+    Shell.FlyoutBehavior="Disabled">
     <VerticalStackLayout Margin="20" Spacing="20">
         <VerticalStackLayout>
             <Label Text="Email" />

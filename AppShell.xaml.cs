@@ -13,13 +13,14 @@ namespace Dienstleistungen_SAP
 
         private void registerRoutes()
         {
+            Routing.RegisterRoute(nameof(UserLoginPage), typeof(UserLoginPage));
+            Routing.RegisterRoute(nameof(UserRegistrationPage), typeof(UserRegistrationPage));
             Routing.RegisterRoute(nameof(MyServicesPage), typeof(MyServicesPage));
+            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(ServiceOffersPage), typeof(ServiceOffersPage));
             Routing.RegisterRoute(nameof(ServiceRequestsPage), typeof(ServiceRequestsPage));
             Routing.RegisterRoute(nameof(AddServicePage), typeof(AddServicePage));
             Routing.RegisterRoute(nameof(ServiceDetailsPage), typeof(ServiceDetailsPage));
-            Routing.RegisterRoute(nameof(UserRegistrationPage), typeof(UserRegistrationPage));
-            Routing.RegisterRoute(nameof(UserLoginPage), typeof(UserLoginPage));
         }
     }
 }
