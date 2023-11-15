@@ -5,10 +5,13 @@ namespace Dienstleistungen_SAP
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+        public UserAuthentification userAuthentification;
+        public AppShell(UserAuthentification userAuthentification)
         {
+            this.userAuthentification = userAuthentification;
             InitializeComponent();
             registerRoutes();
+            BindingContext = userAuthentification;
         }
 
         private void registerRoutes()

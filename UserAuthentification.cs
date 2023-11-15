@@ -12,7 +12,8 @@ public partial class UserAuthentification: ObservableObject
     [ObservableProperty]
     bool isAuthentificated;
 
-    public DataModels.User CurrentUser { get; set; }
+    [ObservableProperty]
+    DataModels.User currentUser;
 
     private readonly FirebaseAuthClient authClient;
 

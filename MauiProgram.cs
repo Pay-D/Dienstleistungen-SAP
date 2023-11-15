@@ -15,7 +15,8 @@ namespace Dienstleistungen_SAP
     {
         public static MauiApp CreateMauiApp()
         {
-            var adminSDKFilepath = "dienstleistungen-sap-firebase-adminsdk-x0k8o-ae275026dd.json";
+
+            var adminSDKFilepath = "dienstleistungen-sap-firebase-adminsdk-xbnsl-87abbe3a38.json";
 
             using var reader = new StreamReader(FileSystem.OpenAppPackageFileAsync(adminSDKFilepath).GetAwaiter().GetResult());
 

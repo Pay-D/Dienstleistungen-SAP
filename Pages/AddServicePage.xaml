@@ -6,7 +6,7 @@
     xmlns:vm="clr-namespace:Dienstleistungen_SAP.ViewModel"
     Title="AddServicePage"
     x:DataType="vm:AddServiceViewModel"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.TabBarIsVisible="False">
     <VerticalStackLayout Margin="20" Spacing="20">
         <VerticalStackLayout>
             <Label Text="Title" />

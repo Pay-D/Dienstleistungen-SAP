@@ -3,36 +3,57 @@
     x:Class="Dienstleistungen_SAP.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pages="clr-namespace:Dienstleistungen_SAP.Pages">
-    <FlyoutItem Title="Login" FlyoutItemIsVisible="False">
-        <ShellContent
-            Title="Login"
-            ContentTemplate="{DataTemplate pages:UserLoginPage}"
-            Route="UserLoginPage" />
-    </FlyoutItem>
-    <FlyoutItem Title="Main">
-        <ShellContent
-            Title="Home"
-            ContentTemplate="{DataTemplate pages:MainPage}"
-            Route="MainPage" />
-    </FlyoutItem>
-    <FlyoutItem Title="MyServices">
-        <ShellContent
-            Title="Home"
-            ContentTemplate="{DataTemplate pages:MyServicesPage}"
-            Route="MyServicesPage" />
-    </FlyoutItem>
-    <FlyoutItem Title="Service Angebote">
-        <ShellContent
-            Title="Service Angebote"
-            ContentTemplate="{DataTemplate pages:ServiceOffersPage}"
-            Route="ServiceOffersPage" />
-    </FlyoutItem>
-    <FlyoutItem Title="Service Anfragen">
-        <ShellContent
-            Title="Service Anfragen"
-            ContentTemplate="{DataTemplate pages:ServiceRequestsPage}"
-            Route="ServiceRequestsPage" />
-    </FlyoutItem>
+    xmlns:pages="clr-namespace:Dienstleistungen_SAP.Pages"
+    FlyoutBehavior="Disabled">
 
+    <Shell.TitleView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="70" />
+            </Grid.ColumnDefinitions>
+            <Image
+                Grid.Column="0"
+                Margin="20,0,0,0"
+                HeightRequest="40"
+                Source="freebay_logo.png" />
+            <HorizontalStackLayout
+                Grid.Column="2"
+                IsVisible="{Binding IsAuthentificated}"
+                Spacing="4"
+                VerticalOptions="Center">
+                <Label>Angemeldet als</Label>
+                <Label Text="{Binding CurrentUser.FirstName}" />
+                <Label Text="{Binding CurrentUser.LastName}" />
+            </HorizontalStackLayout>
+            <Image
+                Grid.Column="3"
+                Margin="0,0,20,0"
+                HeightRequest="40"
+                HorizontalOptions="End"
+                IsVisible="{Binding IsAuthentificated}"
+                Source="user_icon.png" />
+        </Grid>
+    </Shell.TitleView>
+    <ShellContent ContentTemplate="{DataTemplate pages:UserLoginPage}" Route="UserLoginPage" />
+    <ShellContent ContentTemplate="{DataTemplate pages:UserRegistrationPage}" Route="UserRegistrationPage" />
+
+    <ShellContent ContentTemplate="{DataTemplate pages:AddServicePage}" Route="AddServicePage" />
+    <ShellContent ContentTemplate="{DataTemplate pages:ServiceDetailsPage}" Route="ServiceDetailsPage" />
+    <TabBar>
+        <Tab Title="Main">
+            <ShellContent ContentTemplate="{DataTemplate pages:MainPage}" Route="MainPage" />
+        </Tab>
+        <Tab Title="MyServices">
+            <ShellContent ContentTemplate="{DataTemplate pages:MyServicesPage}" Route="MyServicesPage" />
+        </Tab>
+        <Tab Title="Service Angebote">
+            <ShellContent ContentTemplate="{DataTemplate pages:ServiceOffersPage}" Route="ServiceOffersPage" />
+        </Tab>
+        <Tab Title="Service Anfragen">
+            <ShellContent ContentTemplate="{DataTemplate pages:ServiceRequestsPage}" Route="ServiceRequestsPage" />
+        </Tab>
+    </TabBar>
 </Shell>

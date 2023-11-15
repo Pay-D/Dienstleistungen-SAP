@@ -2,11 +2,13 @@
 {
     public partial class App : Application
     {
-        public App()
+        public App(UserAuthentification userAuthentification)
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new AppShell(userAuthentification);
+
+            //Application.Current.UserAppTheme = AppTheme.Light;
         }
     }
 }
